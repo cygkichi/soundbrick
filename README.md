@@ -6,26 +6,37 @@
 ### Example.1
 ```python
 from soundbrick import Soundbrick
-with Soundbrick() as sb:
-    sb.add(['./sample_data/sound_0100.wav',
-            './sample_data/sound_0101.wav',
-            './sample_data/sound_0102.wav',
-            './sample_data/sound_0103.wav',
-            './sample_data/sound_0104.wav',
-            './sample_data/sound_0105.wav',])
-    sb.show('tile1.jpg')
+sb = Soundbrick()
+sb.add(['/your/sound/directory/sound_0100.wav',
+        '/your/sound/directory/sound_0101.wav',
+        '/your/sound/directory/sound_0102.wav',
+        '/your/sound/directory/sound_0103.wav',
+        '/your/sound/directory/sound_0104.wav',
+        '/your/sound/directory/sound_0105.wav',
+        '/your/sound/directory/sound_0106.wav',
+        '/your/sound/directory/sound_0107.wav',
+        '/your/sound/directory/sound_0108.wav',
+        '/your/sound/directory/sound_0109.wav',])
+sb.show('./tile1.jpg')
+sb.close()
 ```
 ![demo1](https://raw.githubusercontent.com/cygkichi/wavetile/master/examples/img/tile1.jpg)
+
 ### Example.2
 ```python
 import glob
 from soundbrick import Soundbrick
 
-with Soundbrick() as sb
-    file_list = glob.glob('./sample_data/*.wav')
-    file_list = sorted(file_list)
-    sb.add(file_list)
-    sb.show('tile2.jpg')
+sb = Soundbrick(background_color="#b55233",
+                line_color="#982222",
+                helical_edge_color="#ffffff",
+                vartical_edge_color="#ffffff",
+                xsize_per_second=1.0,
+                aspect=0.5)
+file_list = sorted(glob.glob('/your/sound/directory/suond_*.wav'))
+sb.add(file_list)
+sb.show('./tile2.jpg')
+sb.close()
 ```
 ![demo2](https://raw.githubusercontent.com/cygkichi/wavetile/master/examples/img/tile2.jpg)
 
@@ -42,7 +53,11 @@ Soundbrick(
     vartical_edge_color = "#ff5470", #
     background_color = "#f5f5dc",    #
     line_color = "#078080",          #
-    yrange = [-1,1]                  #
+    yrange = [-1,1],                 #
+    dpi = 100,
+    xsize_per_second = 1.0,
+    ysize            = 1.0,
+    aspect           = 1.0,
 )
 
 Soundbrick().add(
