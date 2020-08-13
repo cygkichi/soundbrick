@@ -20,7 +20,7 @@ sb.add(['/your/sound/directory/sound_0100.wav',
 sb.show('./tile1.jpg')
 sb.close()
 ```
-![demo1](https://raw.githubusercontent.com/cygkichi/wavetile/master/examples/img/tile1.jpg)
+![demo2](https://raw.githubusercontent.com/cygkichi/soundbrick/master/examples/img/tile1.jpg)
 
 ### Example.2
 ```python
@@ -38,8 +38,7 @@ sb.add(file_list)
 sb.show('./tile2.jpg')
 sb.close()
 ```
-![demo2](https://raw.githubusercontent.com/cygkichi/wavetile/master/examples/img/tile2.jpg)
-
+![demo2](https://raw.githubusercontent.com/cygkichi/soundbrick/master/examples/img/tile2.jpg)
 
 ## Args
 
