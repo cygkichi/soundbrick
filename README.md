@@ -3,22 +3,36 @@
 **wavetile** is simple sound files viwer.
 
 ## Usage
+```python
+from wavetile import Wavetile
+with Wavetile() as wt:
+    wt.add(['./sample_data/sound_0100.wav',
+            './sample_data/sound_0101.wav',
+            './sample_data/sound_0102.wav',
+            './sample_data/sound_0103.wav',
+            './sample_data/sound_0104.wav',
+            './sample_data/sound_0105.wav',])
+    wt.show('tile1.jpg')
+```
+![demo1](https://raw.githubusercontent.com/cygkichi/wavetile/master/examples/img/tile1.jpg)
 
 ```python
 from wavetile import Wavetile
-wt = Wavetile()
-wt.add(['/your/sound/path/sound_001.wav',
-	'/your/sound/path/sound_002.wav',
-	'/your/sound/path/sound_003.wav',
-	'/your/sound/path/sound_004.wav'])
-wt.show('tile.jpg')
-wt.close()
+import glob
+
+with Wavetile() as wt:
+    file_list = glob.glob('./sample_data/*.wav')
+    file_list = sorted(file_list)
+    wt.add(file_list)
+    wt.show('tile2.jpg')
 ```
+![demo2](https://raw.githubusercontent.com/cygkichi/wavetile/master/examples/img/tile2.jpg)
+
 
 ## Installation
 
 ```bash
-pip install wavetiler
+pip install wavetile # xxx
 ```
 
 
@@ -37,4 +51,8 @@ pip install -r requestments.txt
 python oneshot.py ./sample_data
 
 # test
+
+# update
+python3 setup.py sdist bdist_wheel
+python3 -m twine upload --repository testpypi dist/*
 ```
