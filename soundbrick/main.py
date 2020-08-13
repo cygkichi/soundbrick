@@ -23,7 +23,7 @@ class Soundbrick:
     def __init__(self, **kwargs):
         self.config = DEFAULT_CONFIG
         self.config.update(kwargs)
-        # print(self.config)
+        print(self.config)
         # print('init')
         self.wavelist = []
         self.unitimagelist =[]
@@ -43,7 +43,7 @@ class Soundbrick:
     def add(self, file_list):
         for w in file_list:
             path = os.path.abspath(w)
-            # print('add '+path)
+            print('add '+path)
             outfile = self.tmpdir + '/' + path.split('/')[-1].replace('.wav','.jpg')
             self.unitimagelist.append(outfile)
             make_unit_image(path, outfile, self.config)

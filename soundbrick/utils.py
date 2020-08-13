@@ -23,8 +23,8 @@ def make_unit_image(wavefile, imagefile, config):
     line_color          = config['line_color']
     yrange              = config['yrange']
     dpi                 = config['dpi']
-    xsize_per_second    = 3.0
-    ysize               = 1.0
+    xsize_per_second    = config['xsize_per_second']
+    ysize               = config['ysize']
 
     signaldata, samplerate = sf.read(wavefile)
     num_channel = len(signaldata.shape)
