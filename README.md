@@ -20,7 +20,7 @@ sb.add(['/your/sound/directory/sound_0100.wav',
 sb.show('./tile1.jpg')
 sb.close()
 ```
-![demo2](https://raw.githubusercontent.com/cygkichi/soundbrick/master/examples/img/tile1.jpg)
+![demo1](https://raw.githubusercontent.com/cygkichi/wavetile/master/examples/img/tile1.jpg)
 
 ### Example.2
 ```python
@@ -38,7 +38,8 @@ sb.add(file_list)
 sb.show('./tile2.jpg')
 sb.close()
 ```
-![demo2](https://raw.githubusercontent.com/cygkichi/soundbrick/master/examples/img/tile2.jpg)
+![demo2](https://raw.githubusercontent.com/cygkichi/wavetile/master/examples/img/tile2.jpg)
+
 
 ## Args
 
@@ -76,21 +77,25 @@ pip install soundbrick # xxxxx
 ```
 
 
-## Development Environment
+## Developer Memo
 
 ```bash
-# Launch a virtual environment
 python3 -m venv ./venv
 source ./venv/bin/activate
 
 # Install modules
 pip install --upgrade pip
-pip install -r requestments.txt
+pip install numpy
+pip install matplotlib
+pip install soundfile
+pip install opencv-python
+pip install wheel
+pip install twine
 
 # test
 xxx
 
-# update
+# update to pypi
 python3 setup.py sdist bdist_wheel
 python3 -m twine upload --repository testpypi dist/*
 ```

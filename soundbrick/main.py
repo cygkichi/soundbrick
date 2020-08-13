@@ -16,7 +16,7 @@ DEFAULT_CONFIG = {
     "yrange"              : [-1,1],
     "xsize_per_second"    : 3.0,
     "ysize"               : 1.0,
-    "aspect"              : 1.0,
+    "aspect"              : 0.5,
 }
 
 class Soundbrick:
