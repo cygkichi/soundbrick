@@ -10,16 +10,21 @@ import soundfile as sf
 import matplotlib.pyplot as plt
 
 
-def make_unit_image(wavefile, imagefile):
-    is_showlabel = True
-    label_size = 15
-    label_color = "#ff5470"
-    label_alpha = 1.0
-    helical_edge_color = "#232323"
-    vartical_edge_color = "#ff5470"
-    background_color = "#f5f5dc"
-    line_color = "#078080"
-    yrange=[-1,1]
+def make_unit_image(wavefile, imagefile, config):
+
+    # parse config
+    is_showlabel        = config['is_showlabel']
+    label_size          = config['label_size']
+    label_color         = config['label_color']
+    label_alpha         = config['label_alpha']
+    helical_edge_color  = config['helical_edge_color']
+    vartical_edge_color = config['vartical_edge_color']
+    background_color    = config['background_color']
+    line_color          = config['line_color']
+    yrange              = config['yrange']
+    dpi                 = config['dpi']
+    xsize_per_second    = 3.0
+    ysize               = 1.0
 
     signaldata, samplerate = sf.read(wavefile)
     num_channel = len(signaldata.shape)
@@ -31,7 +36,7 @@ def make_unit_image(wavefile, imagefile):
     x0, x1 = 0, times[-1]
     y0, y1 = yrange
     xs, ys = times, signaldata
-    fig = plt.figure(figsize=(times[-1], 1))
+    fig = plt.figure(figsize=(times[-1]*xsize_per_second, ysize))
     ax = fig.add_axes((0,0,1,1))
     ax.axis('off')
     ax.tick_params(bottom=False,left=False,right=False,top=False)
@@ -57,31 +62,37 @@ def make_unit_image(wavefile, imagefile):
                  label_ypos,
                  label_text,
                  fontsize=label_size,
-                 alpha=label_alpha,
                  color=label_color)
 
     # show signal line
     ax.plot(xs, ys, color=line_color)
 
-    plt.savefig(imagefile, dpi=100)
+    plt.savefig(imagefile, dpi=dpi)
     plt.close()
 
-def marge_images(imagefiles, outfile):
-    aspect = 1.0
+def marge_images(imagefiles, outfile, config):
+    # parse config
+    aspect = config['aspect']
     imagefile = os.path.abspath(outfile)
     ims = []
     for f in imagefiles:
-        print(f)
+        # print(f)
         ims.append(cv2.imread(f))
         im = cv2.hconcat(ims)
-    print(im.shape)
-    np_y, np_x_all, _ = im.shape
-    num_row = int(np.sqrt(np_y*np_x_all)/100)
-    np_x_add = num_row - np_x_all % num_row
+
+    num_ydots, num_xdots, _ = im.shape
+    # print('num x dots : '+str(num_xdots))
+    # print('num y dots : '+str(num_ydots))
+    num_row = int(np.sqrt(num_ydots*num_xdots*aspect)/num_ydots)
+    np_x_add = num_row - num_xdots % num_row
     im = np.concatenate([im,
-         np.zeros(100*3*np_x_add).reshape(100, np_x_add, 3)], axis=1)
-    np_y, np_x_all, _ = im.shape
-    print(np_x_add)
-    print(im.shape)
-    cv2.imwrite(imagefile,np.concatenate(np.array([im.reshape(100,num_row, np_x_all//num_row,3)[:,i,:,:] for i in range(num_row)])))
+         np.zeros(num_ydots*3*np_x_add).reshape(num_ydots, np_x_add, 3)], axis=1)
+    num_ydots, num_xdots, _ = im.shape
+    # print(np_x_add)
+    # print(im.shape)
+    im_stacked = np.concatenate(
+        np.array([im.reshape(num_ydots,num_row, num_xdots//num_row,3)[:,i,:,:]
+                  for i in range(num_row)]))
+    # print(im_stacked.shape)
+    cv2.imwrite(imagefile,im_stacked)
 
