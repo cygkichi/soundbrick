@@ -1,9 +1,9 @@
 import os
 import shutil
 
-from wavetile.utils import make_unit_image, marge_images
+from soundbrick.utils import make_unit_image, marge_images
 
-class Wavetile:
+class Soundbrick:
     def __init__(self):
         print('init')
         self.tmpdir = os.path.abspath('./tmp')

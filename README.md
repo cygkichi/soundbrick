@@ -1,31 +1,31 @@
-# wavetile
+# Soundbrick
 
-**wavetile** is simple sound files viwer.
+**Soundbrick** is simple sound files viwer.
 
 ## Usage
 ### Example.1
 ```python
-from wavetile import Wavetile
-with Wavetile() as wt:
-    wt.add(['./sample_data/sound_0100.wav',
+from soundbrick import Soundbrick
+with Soundbrick() as sb:
+    sb.add(['./sample_data/sound_0100.wav',
             './sample_data/sound_0101.wav',
             './sample_data/sound_0102.wav',
             './sample_data/sound_0103.wav',
             './sample_data/sound_0104.wav',
             './sample_data/sound_0105.wav',])
-    wt.show('tile1.jpg')
+    sb.show('tile1.jpg')
 ```
 ![demo1](https://raw.githubusercontent.com/cygkichi/wavetile/master/examples/img/tile1.jpg)
 ### Example.2
 ```python
-from wavetile import Wavetile
 import glob
+from soundbrick import Soundbrick
 
-with Wavetile() as wt:
+with Soundbrick() as sb
     file_list = glob.glob('./sample_data/*.wav')
     file_list = sorted(file_list)
-    wt.add(file_list)
-    wt.show('tile2.jpg')
+    sb.add(file_list)
+    sb.show('tile2.jpg')
 ```
 ![demo2](https://raw.githubusercontent.com/cygkichi/wavetile/master/examples/img/tile2.jpg)
 
@@ -33,7 +33,7 @@ with Wavetile() as wt:
 ## Args
 
 ```python
-Wavetile(
+Soundbrick(
     is_showlabel = True,     #
     label_size = 15,         #
     label_color = "#ff5470", #
@@ -45,11 +45,11 @@ Wavetile(
     yrange = [-1,1]                  #
 )
 
-Wavetile().add(
+Soundbrick().add(
     file_list # list of input-sound-filepath
     )
 
-Wavetile().show(
+Soundbrick().show(
     file # output-image-filepath
 )
 
@@ -58,7 +58,7 @@ Wavetile().show(
 ## Installation
 
 ```bash
-pip install wavetile # xxx
+pip install soundbrick # xxxxx
 ```
 
 
@@ -73,10 +73,8 @@ source ./venv/bin/activate
 pip install --upgrade pip
 pip install -r requestments.txt
 
-# run oneshot.py
-python oneshot.py ./sample_data
-
 # test
+xxx
 
 # update
 python3 setup.py sdist bdist_wheel
