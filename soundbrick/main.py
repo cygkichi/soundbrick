@@ -13,11 +13,12 @@ DEFAULT_CONFIG = {
     "background_color"    : "#ffffff",
     "line_color"          : "#0000ff",
     "dpi"                 : 100,
-    "yrange"              : [-1,1],
+    "yrange"              : [-1, 1],
     "xsize_per_second"    : 3.0,
     "ysize"               : 1.0,
     "aspect"              : 0.5,
 }
+
 
 class Soundbrick:
     def __init__(self, **kwargs):
@@ -26,25 +27,29 @@ class Soundbrick:
         print(self.config)
         # print('init')
         self.wavelist = []
-        self.unitimagelist =[]
-
-    def __enter__(self):
+        self.unitimagelist = []
         self.tmpdir = os.path.abspath('./tmp')
         # print('enter mkdir '+self.tmpdir)
         if os.path.exists(self.tmpdir):
             shutil.rmtree(self.tmpdir)
         os.mkdir(self.tmpdir)
+
+    def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
         # print('exit rmtree '+self.tmpdir)
         shutil.rmtree(self.tmpdir)
 
+    def close(self):
+        shutil.rmtree(self.tmpdir)
+
     def add(self, file_list):
         for w in file_list:
             path = os.path.abspath(w)
-            print('add '+path)
-            outfile = self.tmpdir + '/' + path.split('/')[-1].replace('.wav','.jpg')
+            print('add ' + path)
+            outfile = self.tmpdir + '/' + \
+                path.split('/')[-1].replace('.wav', '.jpg')
             self.unitimagelist.append(outfile)
             make_unit_image(path, outfile, self.config)
             self.wavelist.append(path)
@@ -56,5 +61,3 @@ class Soundbrick:
         # print('makefig')
         # print(self.wavelist)
         marge_images(self.unitimagelist, file, self.config)
-
-

@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="wavetile",
-    version="0.0.5",
+    name="soundbrick",
+    version="0.0.1",
     author="cygkichi",
     author_email="",
     description="A simple sound file viewer like a brickwork",
