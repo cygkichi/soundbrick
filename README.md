@@ -85,6 +85,7 @@ source ./venv/bin/activate
 
 # Install modules
 pip install --upgrade pip
+pip install attrs
 pip install numpy
 pip install matplotlib
 pip install soundfile

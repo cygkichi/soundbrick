@@ -1,38 +1,39 @@
 import os
+import attr
+import typing
 import shutil
 
 from soundbrick.utils import make_unit_image, marge_images
 
-DEFAULT_CONFIG = {
-    "is_showlabel"        : True,
-    "label_size"          : 15,
-    "label_color"         : "#000000",
-    "label_alpha"         : 1,
-    "helical_edge_color"  : "#000000",
-    "vartical_edge_color" : "#55ff55",
-    "background_color"    : "#ffffff",
-    "line_color"          : "#0000ff",
-    "dpi"                 : 100,
-    "yrange"              : [-1, 1],
-    "xsize_per_second"    : 3.0,
-    "ysize"               : 1.0,
-    "aspect"              : 0.5,
-}
+@attr.s(kw_only=True)
+class Soundbrick(object):
+    is_showlabel: bool       = attr.ib(default=True)
+    label_size: float        = attr.ib(default=15.0)
+    label_color: str         = attr.ib(default="#000000")
+    label_alpha: float       = attr.ib(default=1.0)
+    helical_edge_color: str  = attr.ib(default="#000000")
+    vartical_edge_color: str = attr.ib(default="#55ff55")
+    background_color: str    = attr.ib(default="#ffffff")
+    line_color: str          = attr.ib(default="#0000ff")
+    dpi: int                 = attr.ib(default=100)
+    yrange: typing.List[float] = attr.ib(default=[-1, 1])
+    xsize_per_second:float     = attr.ib(default=3.0)
+    ysize: float               = attr.ib(default=1.0)
+    aspect: float              = attr.ib(default=0.5)
 
+    wavelist       = attr.ib(init=False, default=[])
+    unitimagelist   = attr.ib(init=False, default=[])
+    tmpdir          = attr.ib(init=False, default='./tmp')
 
-class Soundbrick:
-    def __init__(self, **kwargs):
-        self.config = DEFAULT_CONFIG
-        self.config.update(kwargs)
-        print(self.config)
-        # print('init')
+'''
+    def __init__(self):
         self.wavelist = []
         self.unitimagelist = []
         self.tmpdir = os.path.abspath('./tmp')
-        # print('enter mkdir '+self.tmpdir)
         if os.path.exists(self.tmpdir):
             shutil.rmtree(self.tmpdir)
         os.mkdir(self.tmpdir)
+
 
     def __enter__(self):
         return self
@@ -61,3 +62,4 @@ class Soundbrick:
         # print('makefig')
         # print(self.wavelist)
         marge_images(self.unitimagelist, file, self.config)
+'''
